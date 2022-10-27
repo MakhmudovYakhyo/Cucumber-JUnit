@@ -20,7 +20,7 @@ public class ConfigurationReader {
         try {
             // 2. Create the object of FileInputStream
             // We need this object to open file as a stream in Java memory
-            FileInputStream file = new FileInputStream("configuration.properties");
+            FileInputStream file = new FileInputStream("config.properties");
 
             // 3. Load the properties object using FileInputStream object
             // Load "properties" object with the "file" we opened using FileInputStream
@@ -36,8 +36,8 @@ public class ConfigurationReader {
     }
 
     /**
-    * This method is used to read value from a configuration.properties file
-    * @param key -> key name in configuration.properties file
+    * This method is used to read value from a config.properties file
+    * @param key -> key name in config.properties file
      * @return -> value for the key, returns null if key is not found
      * driver.get(ConfigurationReader.getProperty("env"))
     * */
