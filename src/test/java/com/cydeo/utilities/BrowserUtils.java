@@ -1,7 +1,6 @@
 package com.cydeo.utilities;
 
 import org.junit.Assert;
-import org.openqa.selenium.WebDriver;
 
 public class BrowserUtils {
 
@@ -33,9 +32,14 @@ public class BrowserUtils {
     public static void verifyTitle()
     BrowserUtils.verifyTitle(driver, "Google");
     */
-    public static void verifyTitle(WebDriver driver, String expectedTitle) {
-        String actualTitle = driver.getTitle();
+    public static void verifyTitle(String expectedTitle) {
+        String actualTitle = Driver.getDriver().getTitle();
         Assert.assertEquals(actualTitle, expectedTitle);
+    }
+
+    public static void verifyTitleContains(String expectedTitle) {
+        String actualTitle = Driver.getDriver().getTitle();
+        Assert.assertTrue(actualTitle.contains(expectedTitle));
     }
 
 }
