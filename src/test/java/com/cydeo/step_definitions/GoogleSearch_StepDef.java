@@ -8,7 +8,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.Keys;
 
-public class GoogleSearch_StepDefinitions {
+public class GoogleSearch_StepDef {
 
     GoogleSearchPage searchPage = new GoogleSearchPage();
 

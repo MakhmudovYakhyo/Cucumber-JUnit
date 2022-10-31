@@ -5,7 +5,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-public class Login_StepDefinitions {
+public class Login_StepDef {
 
     @Then("user should see dashboard")
     public void user_should_see_dashboard() {
