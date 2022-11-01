@@ -10,3 +10,5 @@ import org.junit.runner.RunWith;
         glue = "com/cydeo/step_definitions"
 )
 public class FailedTestRunner {}
+
+// This runner class will be running only failed scenarios
