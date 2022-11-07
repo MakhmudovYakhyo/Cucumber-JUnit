@@ -28,7 +28,7 @@ public class WikipediaSearch_StepDef {
 
     @Then("User sees {string} in the wiki title")
     public void user_sees_steve_jobs_in_the_wiki_title(String title) {
-        BrowserUtils.verifyTitleContains(title);
+        BrowserUtils.verifyTitle(Driver.getDriver(),title);
     }
 
 }

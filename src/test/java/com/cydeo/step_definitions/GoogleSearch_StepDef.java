@@ -24,7 +24,7 @@ public class GoogleSearch_StepDef {
 
     @Then("user sees apple - Google Search is in the google title")
     public void user_sees_apple_google_search_is_in_the_google_title() {
-        BrowserUtils.verifyTitle("apple - Google Search");
+        BrowserUtils.verifyTitle(Driver.getDriver(),"apple - Google Search");
     }
 
     @When("user types {string} in the google search box and clicks enter")
@@ -34,6 +34,6 @@ public class GoogleSearch_StepDef {
 
     @Then("user sees {string} is in the google title")
     public void userSeesIsInTheGoogleTitle(String title) {
-        BrowserUtils.verifyTitle(title);
+        BrowserUtils.verifyTitle(Driver.getDriver(),title);
     }
 }

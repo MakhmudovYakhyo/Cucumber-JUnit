@@ -4,6 +4,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+
 import java.util.concurrent.TimeUnit;
 
 public class Driver {
@@ -12,7 +13,7 @@ public class Driver {
      * Making our driver "driver" instance private, so that it is not reachable from outside the class
      * We make it static, because we want it to run before anything else, also we will use it in static method
      * */
-    private static WebDriver driver;
+    private static final InheritableThreadLocal<WebDriver> driverPool = new InheritableThreadLocal<>();
 
     /*
      * Creating a private constructor, so we are closing access to the object this class from outside any class
@@ -24,38 +25,38 @@ public class Driver {
      * Create re-usable utility method which will return some driver instance when we call it.
      * */
     public static WebDriver getDriver() {
-        if (driver == null) { // if driver/browser was never opened
+        if (driverPool.get() == null) { // if driver/browser was never opened
             String browserType = ConfigurationReader.getProperty("browser");
 
             /*
              * Depending on the browserType our switch statement will determine to open specific type of browser/driver
              * */
             switch (browserType) {
-                case "chrome" : {
+                case "chrome": {
                     WebDriverManager.chromedriver().setup();
-                    driver = new ChromeDriver();
+                    driverPool.set(new ChromeDriver());
                     break;
                 }
-                case "firefox" : {
+                case "firefox": {
                     WebDriverManager.firefoxdriver().setup();
-                    driver = new FirefoxDriver();
+                    driverPool.set(new FirefoxDriver());
                     break;
                 }
             }
-            driver.manage().window().maximize();
-            driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+            driverPool.get().manage().window().maximize();
+            driverPool.get().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         }
 
         /*
          * Some driver instance will be returned every time we call Driver.getDriver() method
          * */
-        return driver;
+        return driverPool.get();
     }
 
-    public static void closeDriver(){
-        if (driver != null) {
-            driver.quit(); // this line will kill the session, value will not be null
-            driver = null;
+    public static void closeDriver() {
+        if (driverPool.get() != null) {
+            driverPool.get().quit(); // this line will kill the session, value will not be null
+            driverPool.set(null);
         }
     }
 }
